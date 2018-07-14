@@ -15,7 +15,7 @@ let dates = {
   ...dateMath,
 
   monthsInYear(year) {
-    let date = dateMath.moment(new Date(year, 0, 1))
+    let date = dateMath.moment(new Date(year, 0, 1)).toDate()
 
     return MONTHS.map(i => dates.month(date, i))
   },
@@ -66,14 +66,17 @@ let dates = {
   merge(date, time) {
     if (time == null && date == null) return null
 
+    const moment = dateMath.moment
+
     if (time == null) time = dateMath.moment().toDate()
     if (date == null) date = dateMath.moment().toDate()
 
-    date = dates.startOf(date, 'day')
-    date = dates.hours(date, dates.hours(time))
-    date = dates.minutes(date, dates.minutes(time))
-    date = dates.seconds(date, dates.seconds(time))
-    return dates.milliseconds(date, dates.milliseconds(time))
+    date = moment(dates.startOf(date, 'day'))
+
+    date.hour(dates.hours(time))
+    date.seconds(dates.seconds(time))
+    date.milliseconds(dates.milliseconds(time))
+    return dates.milliseconds(date)
   },
 
   eqTime(dateA, dateB) {
