@@ -40,9 +40,9 @@ class DropWrapper extends React.Component {
   static propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool,
-    range: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
+    range: PropTypes.arrayOf(PropTypes.object),
     type: PropTypes.string,
-    value: PropTypes.instanceOf(Date),
+    value: PropTypes.object,
   }
 
   static contextTypes = {

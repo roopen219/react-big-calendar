@@ -285,10 +285,7 @@ class Selection {
 
   _handleClickEvent(e) {
     const { pageX, pageY, clientX, clientY } = getEventCoordinates(e)
-    const now = dateMath
-      .moment()
-      .toDate()
-      .getTime()
+    const now = +dateMath.moment()
 
     if (
       this._lastClickData &&

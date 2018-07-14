@@ -1,8 +1,8 @@
 import dates from './dates'
 import dateMath from './dateMath'
 
-const getDstOffset = (start, end) =>
-  Math.abs(start.getTimezoneOffset() - end.getTimezoneOffset())
+// const getDstOffset = (start, end) =>
+//   Math.abs(start.getTimezoneOffset() - end.getTimezoneOffset())
 
 const getKey = (min, max, step, slots) =>
   `${+dates.startOf(min, 'minute')}` +
@@ -12,7 +12,7 @@ const getKey = (min, max, step, slots) =>
 export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
   const key = getKey(start, end, step, timeslots)
 
-  const totalMin = dates.diff(start, end, 'minutes') + getDstOffset(start, end)
+  const totalMin = dates.diff(start, end, 'minutes')
   const minutesFromMidnight = dates.diff(
     dates.startOf(start, 'day'),
     start,
@@ -33,42 +33,38 @@ export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
       const slotIdx = grp * timeslots + slot
       const minFromStart = slotIdx * step
       // A date with total minutes calculated from the start of the day
-      slots[slotIdx] = groups[grp][slot] = dateMath
-        .moment(
-          new Date(
-            start.getFullYear(),
-            start.getMonth(),
-            start.getDate(),
-            0,
-            minutesFromMidnight + minFromStart,
-            0,
-            0
-          )
+      slots[slotIdx] = groups[grp][slot] = dateMath.moment(
+        new Date(
+          start.year(),
+          start.month() - 1,
+          start.date(),
+          0,
+          minutesFromMidnight + minFromStart,
+          0,
+          0
         )
-        .toDate()
+      )
     }
   }
 
   // Necessary to be able to select up until the last timeslot in a day
   const lastSlotMinFromStart = slots.length * step
   slots.push(
-    dateMath
-      .moment(
-        new Date(
-          start.getFullYear(),
-          start.getMonth(),
-          start.getDate(),
-          0,
-          minutesFromMidnight + lastSlotMinFromStart,
-          0,
-          0
-        )
+    dateMath.moment(
+      new Date(
+        start.year(),
+        start.month() - 1,
+        start.date(),
+        0,
+        minutesFromMidnight + lastSlotMinFromStart,
+        0,
+        0
       )
-      .toDate()
+    )
   )
 
   function positionFromDate(date) {
-    const diff = dates.diff(start, date, 'minutes') + getDstOffset(start, date)
+    const diff = dates.diff(start, date, 'minutes')
     return Math.min(diff, totalMin)
   }
 

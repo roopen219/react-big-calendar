@@ -4,10 +4,10 @@ import Intro from './Intro.md'
 import cn from 'classnames'
 import { render } from 'react-dom'
 
-import localizer from 'react-big-calendar/lib/localizers/globalize'
-import globalize from 'globalize'
+import localizer from 'react-big-calendar/lib/localizers/moment'
+import moment from 'moment'
 
-localizer(globalize)
+localizer(moment)
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'

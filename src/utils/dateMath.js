@@ -55,41 +55,33 @@ export default {
   },
 
   startOf(date, unit) {
-    return moment(date)
-      .startOf(unit)
-      .toDate()
+    return moment(date).startOf(unit)
   },
 
   endOf(date, unit) {
-    return moment(date)
-      .endOf(unit)
-      .toDate()
+    return moment(date).endOf(unit)
   },
 
   add(date, num, unit) {
-    return moment(date)
-      .add(
-        UNIT_MULTIPLIER[unit] ? UNIT_MULTIPLIER[unit](num) : num,
-        UNIT_MAP[unit] || unit
-      )
-      .toDate()
+    return moment(date).add(
+      UNIT_MULTIPLIER[unit] ? UNIT_MULTIPLIER[unit](num) : num,
+      UNIT_MAP[unit] || unit
+    )
   },
 
   subtract(date, num, unit) {
-    return moment(date)
-      .subtract(
-        UNIT_MULTIPLIER[unit] ? UNIT_MULTIPLIER[unit](num) : num,
-        UNIT_MAP[unit] || unit
-      )
-      .toDate()
+    return moment(date).subtract(
+      UNIT_MULTIPLIER[unit] ? UNIT_MULTIPLIER[unit](num) : num,
+      UNIT_MAP[unit] || unit
+    )
   },
 
   max(date1, date2) {
-    return moment.max(moment(date1), moment(date2)).toDate()
+    return moment.max(moment(date1), moment(date2))
   },
 
   min(date1, date2) {
-    return moment.min(moment(date1), moment(date2)).toDate()
+    return moment.min(moment(date1), moment(date2))
   },
 
   eq(date1, date2, unit) {

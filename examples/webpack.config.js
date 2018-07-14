@@ -5,7 +5,7 @@ const browsers = ['last 2 versions', 'ie >= 10', 'not android <= 4.4.3']
 
 module.exports = {
   devtool: 'source-map',
-  entry: path.join(__dirname, '../examples/App.js'),
+  entry: path.join(__dirname, '../examples/boot.js'),
   output: {
     path: path.join(__dirname, '../examples/'),
     filename: 'bundle.js',

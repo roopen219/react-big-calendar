@@ -15,7 +15,7 @@ let dates = {
   ...dateMath,
 
   monthsInYear(year) {
-    let date = dateMath.moment(new Date(year, 0, 1)).toDate()
+    let date = dateMath.moment(new Date(year, 0, 1))
 
     return MONTHS.map(i => dates.month(date, i))
   },
@@ -68,15 +68,15 @@ let dates = {
 
     const moment = dateMath.moment
 
-    if (time == null) time = dateMath.moment().toDate()
-    if (date == null) date = dateMath.moment().toDate()
+    if (time == null) time = dateMath.moment()
+    if (date == null) date = dateMath.moment()
 
     date = moment(dates.startOf(date, 'day'))
 
     date.hour(dates.hours(time))
     date.seconds(dates.seconds(time))
     date.milliseconds(dates.milliseconds(time))
-    return dates.milliseconds(date)
+    return date
   },
 
   eqTime(dateA, dateB) {
@@ -139,31 +139,19 @@ let dates = {
   },
 
   week(date) {
-    var d = dateMath.moment(new Date(date)).toDate()
-    d.setHours(0, 0, 0)
-    d.setDate(d.getDate() + 4 - (d.getDay() || 7))
-    return Math.ceil(
-      ((d - dateMath.moment(new Date(d.getFullYear(), 0, 1)).toDate()) /
-        8.64e7 +
-        1) /
-        7
-    )
+    Math.ceil(dateMath.moment(date).week())
   },
 
   today() {
-    return dates.startOf(dateMath.moment().toDate(), 'day')
+    return dates.startOf(dateMath.moment(), 'day')
   },
 
   yesterday() {
-    return dates.add(
-      dates.startOf(dateMath.moment().toDate(), 'day'),
-      -1,
-      'day'
-    )
+    return dates.add(dates.startOf(dateMath.moment(), 'day'), -1, 'day')
   },
 
   tomorrow() {
-    return dates.add(dates.startOf(dateMath.moment().toDate(), 'day'), 1, 'day')
+    return dates.add(dates.startOf(dateMath.moment(), 'day'), 1, 'day')
   },
 }
 

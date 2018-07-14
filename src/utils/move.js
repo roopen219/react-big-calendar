@@ -8,7 +8,7 @@ export default function moveDate(View, { action, date, today, ...props }) {
 
   switch (action) {
     case navigate.TODAY:
-      date = today || dateMath.moment().toDate()
+      date = today || dateMath.moment()
       break
     case navigate.DATE:
       break

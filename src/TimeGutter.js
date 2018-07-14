@@ -9,8 +9,8 @@ import TimeSlotGroup from './TimeSlotGroup'
 
 export default class TimeGutter extends Component {
   static propTypes = {
-    min: PropTypes.instanceOf(Date).isRequired,
-    max: PropTypes.instanceOf(Date).isRequired,
+    min: PropTypes.object.isRequired,
+    max: PropTypes.object.isRequired,
     timeslots: PropTypes.number.isRequired,
     step: PropTypes.number.isRequired,
     getNow: PropTypes.func.isRequired,
