@@ -1,9 +1,9 @@
 {
-  "name": "react-big-calendar",
+  "name": "@roopendra/react-big-calendar",
   "version": "0.19.2",
-  "description": "Calendar! with events",
-  "author": "Jason Quense <monastic.panic@gmail.com>",
-  "repository": "intljusticemission/react-big-calendar",
+  "description": "Fork of react-big-calendar with timezone support (depends on moment-timezone)",
+  "author": "Roopendra <roopendratalekar@gmail.com>",
+  "repository": "roopen219/react-big-calendar",
   "license": "MIT",
   "main": "lib/index.js",
   "style": "lib/css/react-big-calendar.css",
