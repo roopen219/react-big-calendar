@@ -1,5 +1,5 @@
 /* eslint no-fallthrough: off */
-import dateMath from 'date-arithmetic'
+import dateMath from './dateMath'
 import localizer from '../localizer'
 
 const MILLI = {
@@ -15,7 +15,7 @@ let dates = {
   ...dateMath,
 
   monthsInYear(year) {
-    let date = new Date(year, 0, 1)
+    let date = dateMath.moment(new Date(year, 0, 1))
 
     return MONTHS.map(i => dates.month(date, i))
   },
@@ -66,8 +66,8 @@ let dates = {
   merge(date, time) {
     if (time == null && date == null) return null
 
-    if (time == null) time = new Date()
-    if (date == null) date = new Date()
+    if (time == null) time = dateMath.moment().toDate()
+    if (date == null) date = dateMath.moment().toDate()
 
     date = dates.startOf(date, 'day')
     date = dates.hours(date, dates.hours(time))
@@ -136,22 +136,31 @@ let dates = {
   },
 
   week(date) {
-    var d = new Date(date)
+    var d = dateMath.moment(new Date(date)).toDate()
     d.setHours(0, 0, 0)
     d.setDate(d.getDate() + 4 - (d.getDay() || 7))
-    return Math.ceil(((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7)
+    return Math.ceil(
+      ((d - dateMath.moment(new Date(d.getFullYear(), 0, 1)).toDate()) /
+        8.64e7 +
+        1) /
+        7
+    )
   },
 
   today() {
-    return dates.startOf(new Date(), 'day')
+    return dates.startOf(dateMath.moment().toDate(), 'day')
   },
 
   yesterday() {
-    return dates.add(dates.startOf(new Date(), 'day'), -1, 'day')
+    return dates.add(
+      dates.startOf(dateMath.moment().toDate(), 'day'),
+      -1,
+      'day'
+    )
   },
 
   tomorrow() {
-    return dates.add(dates.startOf(new Date(), 'day'), 1, 'day')
+    return dates.add(dates.startOf(dateMath.moment().toDate(), 'day'), 1, 'day')
   },
 }
 

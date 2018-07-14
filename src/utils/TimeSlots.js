@@ -1,11 +1,12 @@
 import dates from './dates'
+import dateMath from './dateMath'
 
 const getDstOffset = (start, end) =>
   Math.abs(start.getTimezoneOffset() - end.getTimezoneOffset())
 
 const getKey = (min, max, step, slots) =>
-  `${+dates.startOf(min, 'minutes')}` +
-  `${+dates.startOf(max, 'minutes')}` +
+  `${+dates.startOf(min, 'minute')}` +
+  `${+dates.startOf(max, 'minute')}` +
   `${step}-${slots}`
 
 export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
@@ -32,30 +33,38 @@ export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
       const slotIdx = grp * timeslots + slot
       const minFromStart = slotIdx * step
       // A date with total minutes calculated from the start of the day
-      slots[slotIdx] = groups[grp][slot] = new Date(
-        start.getFullYear(),
-        start.getMonth(),
-        start.getDate(),
-        0,
-        minutesFromMidnight + minFromStart,
-        0,
-        0
-      )
+      slots[slotIdx] = groups[grp][slot] = dateMath
+        .moment(
+          new Date(
+            start.getFullYear(),
+            start.getMonth(),
+            start.getDate(),
+            0,
+            minutesFromMidnight + minFromStart,
+            0,
+            0
+          )
+        )
+        .toDate()
     }
   }
 
   // Necessary to be able to select up until the last timeslot in a day
   const lastSlotMinFromStart = slots.length * step
   slots.push(
-    new Date(
-      start.getFullYear(),
-      start.getMonth(),
-      start.getDate(),
-      0,
-      minutesFromMidnight + lastSlotMinFromStart,
-      0,
-      0
-    )
+    dateMath
+      .moment(
+        new Date(
+          start.getFullYear(),
+          start.getMonth(),
+          start.getDate(),
+          0,
+          minutesFromMidnight + lastSlotMinFromStart,
+          0,
+          0
+        )
+      )
+      .toDate()
   )
 
   function positionFromDate(date) {
@@ -107,11 +116,11 @@ export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
 
       const rangeStartMin = positionFromDate(rangeStart)
       const rangeEndMin = positionFromDate(rangeEnd)
-      const top = rangeStartMin / totalMin * 100
+      const top = (rangeStartMin / totalMin) * 100
 
       return {
         top,
-        height: rangeEndMin / totalMin * 100 - top,
+        height: (rangeEndMin / totalMin) * 100 - top,
         start: positionFromDate(rangeStart),
         startDate: rangeStart,
         end: positionFromDate(rangeEnd),

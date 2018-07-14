@@ -14,6 +14,7 @@ import { accessor, dateFormat } from './utils/propTypes'
 import { notify } from './utils/helpers'
 import { accessor as get } from './utils/accessors'
 import { inRange, sortEvents } from './utils/eventLevels'
+import dateMath from './utils/dateMath'
 
 export default class TimeGrid extends Component {
   static propTypes = {
@@ -66,9 +67,9 @@ export default class TimeGrid extends Component {
   static defaultProps = {
     step: 30,
     timeslots: 2,
-    min: dates.startOf(new Date(), 'day'),
-    max: dates.endOf(new Date(), 'day'),
-    scrollToTime: dates.startOf(new Date(), 'day'),
+    min: dates.startOf(dateMath.moment().toDate(), 'day'),
+    max: dates.endOf(dateMath.moment().toDate(), 'day'),
+    scrollToTime: dates.startOf(dateMath.moment().toDate(), 'day'),
   }
 
   constructor(props) {

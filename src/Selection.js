@@ -1,6 +1,7 @@
 import contains from 'dom-helpers/query/contains'
 import closest from 'dom-helpers/query/closest'
 import events from 'dom-helpers/events'
+import dateMath from './utils/dateMath'
 
 function addEventListener(type, handler, target = document) {
   events.on(target, type, handler)
@@ -284,7 +285,10 @@ class Selection {
 
   _handleClickEvent(e) {
     const { pageX, pageY, clientX, clientY } = getEventCoordinates(e)
-    const now = new Date().getTime()
+    const now = dateMath
+      .moment()
+      .toDate()
+      .getTime()
 
     if (
       this._lastClickData &&

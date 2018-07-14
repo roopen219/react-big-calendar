@@ -25,6 +25,7 @@ import omit from 'lodash/omit'
 import defaults from 'lodash/defaults'
 import transform from 'lodash/transform'
 import mapValues from 'lodash/mapValues'
+import dateMath from './utils/dateMath'
 
 function viewNames(_views) {
   return !Array.isArray(_views) ? Object.keys(_views) : _views
@@ -712,7 +713,7 @@ class Calendar extends React.Component {
     resourceTitleAccessor: 'title',
 
     longPressThreshold: 250,
-    getNow: () => new Date(),
+    getNow: () => dateMath.moment().toDate(),
   }
 
   getViews = () => {
