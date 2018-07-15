@@ -74,6 +74,7 @@ let dates = {
     date = moment(dates.startOf(date, 'day'))
 
     date.hour(dates.hours(time))
+    date.minutes(dates.minutes(time))
     date.seconds(dates.seconds(time))
     date.milliseconds(dates.milliseconds(time))
     return date
