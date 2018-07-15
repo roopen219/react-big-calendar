@@ -1,6 +1,6 @@
 {
   "name": "@roopendra/react-big-calendar",
-  "version": "0.19.7",
+  "version": "0.19.8",
   "description": "Fork of react-big-calendar with timezone support (depends on moment-timezone)",
   "author": "Roopendra <roopendratalekar@gmail.com>",
   "repository": "roopen219/react-big-calendar",
@@ -22,6 +22,7 @@
     "full calendar"
   ],
   "scripts": {
+    "prepublish": "npm run build",
     "clean": "rimraf lib",
     "clean:examples": "rimraf examples/static",
     "l": "lessc --autoprefix=\"ie >= 10, safari >= 8, last 2 versions\" ",
