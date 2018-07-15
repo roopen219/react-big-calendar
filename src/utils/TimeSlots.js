@@ -1,5 +1,4 @@
 import dates from './dates'
-import dateMath from './dateMath'
 
 // const getDstOffset = (start, end) =>
 //   Math.abs(start.getTimezoneOffset() - end.getTimezoneOffset())
@@ -12,7 +11,7 @@ const getKey = (min, max, step, slots) =>
 export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
   const key = getKey(start, end, step, timeslots)
 
-  const totalMin = dates.diff(start, end, 'minutes')
+  const totalMin = dates.diff(start, end, 'minutes') + 1
   const minutesFromMidnight = dates.diff(
     dates.startOf(start, 'day'),
     start,
@@ -33,34 +32,41 @@ export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
       const slotIdx = grp * timeslots + slot
       const minFromStart = slotIdx * step
       // A date with total minutes calculated from the start of the day
-      slots[slotIdx] = groups[grp][slot] = dateMath.moment(
-        new Date(
-          start.year(),
-          start.month() - 1,
-          start.date(),
-          0,
-          minutesFromMidnight + minFromStart,
-          0,
-          0
-        )
-      )
+      // slots[slotIdx] = groups[grp][slot] = dateMath.moment(
+      //   new Date(
+      //     start.year(),
+      //     start.month() - 1,
+      //     start.date(),
+      //     0,
+      //     minutesFromMidnight + minFromStart,
+      //     0,
+      //     0
+      //   )
+      // )
+      slots[slotIdx] = groups[grp][slot] = start
+        .clone()
+        .add(minutesFromMidnight + minFromStart, 'minutes')
     }
   }
 
   // Necessary to be able to select up until the last timeslot in a day
   const lastSlotMinFromStart = slots.length * step
+  // slots.push(
+  //   dateMath.moment(
+  //     new Date(
+  //       start.year(),
+  //       start.month() - 1,
+  //       start.date(),
+  //       0,
+  //       minutesFromMidnight + lastSlotMinFromStart,
+  //       0,
+  //       0
+  //     )
+  //   )
+  // )
+
   slots.push(
-    dateMath.moment(
-      new Date(
-        start.year(),
-        start.month() - 1,
-        start.date(),
-        0,
-        minutesFromMidnight + lastSlotMinFromStart,
-        0,
-        0
-      )
-    )
+    start.clone().add(minutesFromMidnight + lastSlotMinFromStart, 'minutes')
   )
 
   function positionFromDate(date) {
