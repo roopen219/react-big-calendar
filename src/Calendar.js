@@ -768,6 +768,11 @@ class Calendar extends React.Component {
       ...props
     } = this.props
 
+    const scrollToTime =
+      this.props.scrollToTime || dateMath.moment().startOf('day')
+    const min = this.props.min || dateMath.moment().startOf('day')
+    const max = this.props.max || dateMath.moment().endOf('day')
+
     current = current || getNow()
 
     formats = defaultFormats(formats)
@@ -817,6 +822,9 @@ class Calendar extends React.Component {
           date={current}
           getNow={getNow}
           length={length}
+          min={min}
+          max={max}
+          scrollToTime={scrollToTime}
           components={viewComponents}
           getDrilldownView={this.getDrilldownView}
           onNavigate={this.handleNavigate}
