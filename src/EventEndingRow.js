@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 import EventRowMixin from './EventRowMixin'
 import { eventLevels } from './utils/eventLevels'
 import message from './utils/messages'
@@ -9,7 +9,7 @@ let isSegmentInSlot = (seg, slot) => seg.left <= slot && seg.right >= slot
 let eventsInSlot = (segments, slot) =>
   segments.filter(seg => isSegmentInSlot(seg, slot)).length
 
-class EventEndingRow extends React.Component {
+class EventEndingRow extends PureComponent {
   static propTypes = {
     segments: PropTypes.array,
     slots: PropTypes.number,

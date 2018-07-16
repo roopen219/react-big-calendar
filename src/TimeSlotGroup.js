@@ -1,11 +1,11 @@
 import cn from 'classnames'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import { elementType } from './utils/propTypes'
 import BackgroundWrapper from './BackgroundWrapper'
 
-export default class TimeSlotGroup extends Component {
+export default class TimeSlotGroup extends PureComponent {
   static propTypes = {
     renderSlot: PropTypes.func,
     timeSlotWrapperComponent: elementType,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class EventWrapper extends React.Component {
+class EventWrapper extends React.PureComponent {
   render() {
     return this.props.children
   }

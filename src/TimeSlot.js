@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import cn from 'classnames'
 import { elementType } from './utils/propTypes'
 
-export default class TimeSlot extends Component {
+export default class TimeSlot extends PureComponent {
   static propTypes = {
     timeSlotWrapperComponent: elementType,
     value: PropTypes.object.isRequired,

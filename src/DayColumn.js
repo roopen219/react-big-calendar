@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { findDOMNode } from 'react-dom'
 import cn from 'classnames'
 
@@ -15,7 +15,7 @@ import { accessor as get } from './utils/accessors'
 import * as DayEventLayout from './utils/DayEventLayout'
 import TimeSlotGroup from './TimeSlotGroup'
 
-class DayColumn extends React.Component {
+class DayColumn extends PureComponent {
   static propTypes = {
     events: PropTypes.array.isRequired,
     components: PropTypes.object,

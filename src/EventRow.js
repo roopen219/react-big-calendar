@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 import EventRowMixin from './EventRowMixin'
 
-class EventRow extends React.Component {
+class EventRow extends PureComponent {
   static propTypes = {
     segments: PropTypes.array,
     ...EventRowMixin.propTypes,

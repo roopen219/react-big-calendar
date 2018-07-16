@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 import cn from 'classnames'
 import dates from './utils/dates'
 import { accessor, elementType } from './utils/propTypes'
@@ -25,7 +25,7 @@ let propTypes = {
   onDoubleClick: PropTypes.func.isRequired,
 }
 
-class EventCell extends React.Component {
+class EventCell extends PureComponent {
   render() {
     let {
       className,

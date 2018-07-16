@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import raf from 'dom-helpers/util/requestAnimationFrame'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import dates from './utils/dates'
@@ -15,7 +15,7 @@ import { notify } from './utils/helpers'
 import { accessor as get } from './utils/accessors'
 import { inRange, sortEvents } from './utils/eventLevels'
 
-export default class TimeGrid extends Component {
+export default class TimeGrid extends PureComponent {
   static propTypes = {
     events: PropTypes.array.isRequired,
     resources: PropTypes.array,

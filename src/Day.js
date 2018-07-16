@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { PureComponent } from 'react'
 
 import dates from './utils/dates'
 import { navigate } from './utils/constants'
 import TimeGrid from './TimeGrid'
 import localizer from './localizer'
 
-class Day extends React.Component {
+class Day extends PureComponent {
   static propTypes = {
     date: PropTypes.object.isRequired,
   }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import scrollbarSize from 'dom-helpers/util/scrollbarSize'
-import React from 'react'
+import React, { PureComponent } from 'react'
 
 import dates from './utils/dates'
 import { elementType, accessor, dateFormat } from './utils/propTypes'
@@ -11,7 +11,7 @@ import Header from './Header'
 import { notify } from './utils/helpers'
 import { accessor as get } from './utils/accessors'
 
-class TimeGridHeader extends React.Component {
+class TimeGridHeader extends PureComponent {
   static propTypes = {
     range: PropTypes.array.isRequired,
     events: PropTypes.array.isRequired,
