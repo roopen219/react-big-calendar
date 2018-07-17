@@ -193,7 +193,8 @@ class Selection {
     if (
       e.which === 3 ||
       e.button === 2 ||
-      !isOverContainer(node, clientX, clientY)
+      !isOverContainer(node, clientX, clientY) ||
+      !contains(node, e.target)
     )
       return
 
