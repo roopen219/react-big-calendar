@@ -140,7 +140,7 @@ let dates = {
   },
 
   week(date) {
-    Math.ceil(dateMath.moment(date).week())
+    return Math.ceil(dateMath.moment(date).week())
   },
 
   today() {
